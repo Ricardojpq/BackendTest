@@ -101,6 +101,7 @@ namespace BackendTest.Database.Persistence.SeedData
                 }
             };
 
+            _logger.LogInformation("DATA a insertar", data);
             if (data != null)
             {
                 await SeedProducts(context, dataProducts);
@@ -111,10 +112,11 @@ namespace BackendTest.Database.Persistence.SeedData
         {
             try
             {
+
                 var ProductList = await context.Products.AsNoTracking().ToListAsync();
 
                 var newEntities = data.Where(x => !ProductList.Any(y => x.Name == y.Name)).ToList();
-
+                _logger.LogInformation("SeedProducts: ", newEntities);
                 if (newEntities.Any())
                 {
                     await context.Products.AddRangeAsync(newEntities);
