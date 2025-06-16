@@ -32,7 +32,7 @@ namespace BackendTest.Database.Persistence.SeedData
                 new Product
                 {
                     Name = "PC",
-                    Price = 14.1m, 
+                    Price = 14.1m,
                     Stock = 1,
                     Description = "PC GAMER"
                 },
@@ -98,13 +98,19 @@ namespace BackendTest.Database.Persistence.SeedData
                     Price = 175.20m,
                     Stock = 6,
                     Description = "Impresora, escáner y copiadora con Wi-Fi"
+                },
+                new Product
+                {
+                    Name = "Case Gamer",
+                    Price = 200m,
+                    Stock = 0,
+                    Description = "Case Gamer con lucer RGB"
                 }
             };
 
-            _logger.LogInformation("DATA a insertar", dataProducts);
             //if (data != null)
             //{
-                await SeedProducts(context, dataProducts);
+            await SeedProducts(context, dataProducts);
             //}
         }
         #region SeedData
@@ -116,7 +122,6 @@ namespace BackendTest.Database.Persistence.SeedData
                 var ProductList = await context.Products.AsNoTracking().ToListAsync();
 
                 var newEntities = data.Where(x => !ProductList.Any(y => x.Name == y.Name)).ToList();
-                _logger.LogInformation("SeedProducts: ", newEntities);
                 if (newEntities.Any())
                 {
                     await context.Products.AddRangeAsync(newEntities);
