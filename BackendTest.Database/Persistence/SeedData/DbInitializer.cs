@@ -32,7 +32,7 @@ namespace BackendTest.Database.Persistence.SeedData
                 new Product
                 {
                     Name = "PC",
-                    Price = 14.1m, // 'm' para indicar decimal
+                    Price = 14.1m, 
                     Stock = 1,
                     Description = "PC GAMER"
                 },
@@ -101,11 +101,11 @@ namespace BackendTest.Database.Persistence.SeedData
                 }
             };
 
-            _logger.LogInformation("DATA a insertar", data);
-            if (data != null)
-            {
+            _logger.LogInformation("DATA a insertar", dataProducts);
+            //if (data != null)
+            //{
                 await SeedProducts(context, dataProducts);
-            }
+            //}
         }
         #region SeedData
         public static async Task SeedProducts(ApplicationDbContext context, IEnumerable<Product> data)
